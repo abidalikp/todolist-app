@@ -3,8 +3,6 @@
 {% block content %}
 
 <div class="row">
-    <h1>TODO LIST</h1>
-    <div class="divider"></div>
     <form action="{% url 'add' %}" method="POST" role="form" class="row">
         {% csrf_token %}
         <div class="input-field col s12 m6">
