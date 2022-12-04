@@ -31,6 +31,12 @@ def completedTodo(request, todo_id):
     return redirect('index')
 
 @login_required
+def deleteTodo(request, todo_id):
+    todo = Todolist.objects.get(pk=todo_id)
+    todo.delete()
+    return redirect('index')
+
+@login_required
 def deleteCompleted(request):
     Todolist.objects.filter(completed=True, user=request.user).delete()
     return redirect('index')

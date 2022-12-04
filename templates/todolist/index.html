@@ -17,9 +17,27 @@
         <ul class="collection">
             {% for item in todo_items %}
                 {% if item.completed %}
-                    <li class="collection-item grey-text">{{item}}</li>
+                <li class="collection-item grey-text row">
+                    <div class="col s11">
+                        {{item}}
+                    </div>
+                    <div class="col s1">
+                        <a href="{% url 'delete' item.id %}">
+                            <i class="material-icons prefix red-text">delete</i>
+                        </a> 
+                    </div>
+                </li>
                 {% else %}
-                    <li class="collection-item"><a href="{% url 'completed' item.id %}">{{item}}</a></li>
+                <li class="collection-item row">
+                    <div class="col s11">
+                        <a href="{% url 'completed' item.id %}">{{item}}</a>
+                    </div>
+                    <div class="col s1">
+                        <a href="{% url 'delete' item.id %}">
+                            <i class="material-icons prefix red-text">delete</i>
+                        </a> 
+                    </div>
+                </li>
                 {% endif %}
             {% endfor %}
         </ul>
