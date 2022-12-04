@@ -7,7 +7,7 @@ from .forms import TodoListForm
 
 @login_required
 def index(request):
-    todo_items = Todolist.objects.order_by('id')
+    todo_items = Todolist.objects.filter(user=request.user).order_by('id')
     form = TodoListForm()
     context = {'todo_items': todo_items, 'form': form}
     return render(request, 'todolist/index.html', context)
@@ -32,11 +32,11 @@ def completedTodo(request, todo_id):
 
 @login_required
 def deleteCompleted(request):
-    Todolist.objects.filter(completed=True).delete()
+    Todolist.objects.filter(completed=True, user=request.user).delete()
     return redirect('index')
 
 @login_required
 def deleteAll(request):
-    Todolist.objects.all().delete()
+    Todolist.objects.filter(user=request.user).delete()
     return redirect('index')
     
